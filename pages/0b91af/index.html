@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>16、CompletionService | 闲人路过</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="">
+    <meta name="description" content="个人学习网站。">
+    <meta name="keywords" content="web,java,中间件,技术文档,学习,git,github,markdown,sql">
+    <meta name="baidu-site-verification" content="7F55weZDDc">
+    <meta name="theme-color" content="#11a8cd">
+    
+    <link rel="preload" href="/assets/css/0.styles.5208a585.css" as="style"><link rel="preload" href="/assets/js/app.10c5f00c.js" as="script"><link rel="preload" href="/assets/js/2.21c68852.js" as="script"><link rel="preload" href="/assets/js/3.9085141e.js" as="script"><link rel="preload" href="/assets/js/16.3bcf5d67.js" as="script"><link rel="prefetch" href="/assets/js/10.266a9309.js"><link rel="prefetch" href="/assets/js/11.aff33370.js"><link rel="prefetch" href="/assets/js/12.0cfa577f.js"><link rel="prefetch" href="/assets/js/13.0700be5d.js"><link rel="prefetch" href="/assets/js/14.c4975fef.js"><link rel="prefetch" href="/assets/js/15.a19b84b6.js"><link rel="prefetch" href="/assets/js/17.72e555f9.js"><link rel="prefetch" href="/assets/js/18.75b85473.js"><link rel="prefetch" href="/assets/js/19.22daefdc.js"><link rel="prefetch" href="/assets/js/20.cb222feb.js"><link rel="prefetch" href="/assets/js/21.5c070657.js"><link rel="prefetch" href="/assets/js/22.3f0224db.js"><link rel="prefetch" href="/assets/js/23.673f2f69.js"><link rel="prefetch" href="/assets/js/24.1aaaf9ab.js"><link rel="prefetch" href="/assets/js/25.f8736a84.js"><link rel="prefetch" href="/assets/js/26.b1c880ee.js"><link rel="prefetch" href="/assets/js/27.6ffb1fdc.js"><link rel="prefetch" href="/assets/js/28.892645fc.js"><link rel="prefetch" href="/assets/js/29.5dfe46f3.js"><link rel="prefetch" href="/assets/js/30.31b258ad.js"><link rel="prefetch" href="/assets/js/31.f251a2bc.js"><link rel="prefetch" href="/assets/js/32.0346840a.js"><link rel="prefetch" href="/assets/js/4.04750017.js"><link rel="prefetch" href="/assets/js/5.4f076d4b.js"><link rel="prefetch" href="/assets/js/6.1eb8548f.js"><link rel="prefetch" href="/assets/js/7.089fa1e6.js"><link rel="prefetch" href="/assets/js/8.0a94b96f.js"><link rel="prefetch" href="/assets/js/9.a2167b5f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5208a585.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open no-sidebar have-rightmenu have-body-img"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">闲人路过</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div> <a href="https://github.com/ljlsbqf" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar-hover-trigger"></div> <aside class="sidebar" style="display:none;"><!----> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div> <a href="https://github.com/ljlsbqf" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <!----> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-d5e9d2e6><div class="articleInfo" data-v-d5e9d2e6><ul class="breadcrumbs" data-v-d5e9d2e6><li data-v-d5e9d2e6><a href="/" title="首页" class="iconfont icon-home router-link-active" data-v-d5e9d2e6></a></li> <li data-v-d5e9d2e6><a href="/java/#java" data-v-d5e9d2e6>java</a></li><li data-v-d5e9d2e6><a href="/java/#juc" data-v-d5e9d2e6>juc</a></li></ul> <div class="info" data-v-d5e9d2e6><div title="作者" class="author iconfont icon-touxiang" data-v-d5e9d2e6><a href="https://github.com/ljlsbqf" target="_blank" title="作者" class="beLink" data-v-d5e9d2e6>ljlsbqf</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-d5e9d2e6><a href="javascript:;" data-v-d5e9d2e6>2022-05-30</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><div class="right-menu-wrapper"><div class="right-menu-margin"><div class="right-menu-content"></div></div></div> <h1><!---->16、CompletionService<!----></h1>  <div class="theme-vdoing-content content__default"><h3 id="说明"><a href="#说明" class="header-anchor">#</a> 说明</h3> <blockquote><p>接口CompletionService可以一边产生新的异步任务，一边处理已完成任务的返回值。这样可以让任务执行和任务返回分开处理。使用submit提交任务，使用take获取已经执行完成的任务，并按照任务执行完成的时间处理返回值。
+可以避免FutureTask类阻塞的问题，可更加有效地处理Future的返回值，也就是哪个任务先执行完，CompletionService就先获取哪个任务的返回值优先处理。</p></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class MyCallable implements Callable&lt;String&gt; {
+
+    private String name;
+
+    public MyCallable(String name){
+        this.name = name;
+    }
+
+    public Long getSleep(){
+        Random r = new Random();
+        int max=3000;
+        int min=10;
+        return Long.valueOf(r.nextInt(max)%(max-min+1) + min);
+    }
+    @Override
+    public String call() throws Exception {
+        TimeUnit.MILLISECONDS.sleep(getSleep());
+        return Thread.currentThread().getName()+&quot;---return:&quot;+name;
+    }
+}
+
+public class CompletionServiceTest {
+
+    public static void main(String[] args) {
+
+        //1、默认创建线程数:corePoolSize；最大创建线程数:maximumPoolSize
+        //2、待执行任务submit()后，将存入队列等待执行
+        //3、当待执行任务数超过队列大小,无法存入，则会根据maximumPoolSize参数继续创建新的线程，至只线程池中存活线程达到最大值：maximumPoolSize
+        //4、当前配置的是有界队列，当队列达到最大值，将抛出异常：java.util.concurrent.RejectedExecutionException
+        LinkedBlockingDeque queue = new LinkedBlockingDeque&lt;&gt;(5);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3,10,5, TimeUnit.SECONDS,queue);
+        CompletionService completionService = new ExecutorCompletionService(threadPoolExecutor);
+
+        List&lt;Callable&gt; callableList = new ArrayList&lt;Callable&gt;();
+        int size =10;
+        for(int i=0;i&lt;size;i++){
+            MyCallable myCallable = new MyCallable(&quot;call&quot;+i);
+            callableList.add(myCallable);
+            System.out.println(&quot;添加任务&quot;+&quot;call&quot;+i);
+            completionService.submit(myCallable);
+        }
+
+        for(int i=0;i&lt;size;i++){
+            try {
+                System.out.println(&quot;获取执行结果：&quot;+completionService.take().get());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        threadPoolExecutor.shutdown();
+
+    }
+}
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br></div></div></div></div>  <div class="page-edit"><div class="edit-link"><a href="https://github.com/ljlsbqf/edit/master/docs/01.java/juc/16、CompletionService.md" target="_blank" rel="noopener noreferrer">编辑</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2022/05/30, 18:32:30</span></div></div> <div class="page-nav-wapper"><!----> <!----></div></div> <div class="article-list"><div class="article-title"><a href="/archives/" class="iconfont icon-bi">最近更新</a></div> <div class="article-wrapper"><dl><dd>01</dd> <dt><a href="/pages/f95237/"><div>
+            10、AbstractQueuedSynchronizer
+            <!----></div></a> <span class="date">05-30</span></dt></dl><dl><dd>02</dd> <dt><a href="/pages/0af6c1/"><div>
+            11、ThreadLocal如何存储信息
+            <!----></div></a> <span class="date">05-30</span></dt></dl><dl><dd>03</dd> <dt><a href="/pages/a7ad38/"><div>
+            12、ConcurrentHashMap
+            <!----></div></a> <span class="date">05-30</span></dt></dl> <dl><dd></dd> <dt><a href="/archives/" class="more">更多文章&gt;</a></dt></dl></div></div></main></div> <div class="footer"><!----> 
+  本博客搭建脚本来源
+  <a href="https://github.com/xugaoyi/vuepress-theme-vdoing" target="_blank" title="本站主题">Vdoing</a> 
+    | Copyright © 2022-2022
+    <span><a href="https://github.com/xugaoyi/vuepress-theme-vdoing/blob/master/LICENSE" target="_blank">MIT License</a></span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <div class="body-bg" style="background:url() center center / cover no-repeat;opacity:0.5;"></div> <!----> <!----></div><div class="global-ui"><div></div></div></div>
+    <script src="/assets/js/app.10c5f00c.js" defer></script><script src="/assets/js/2.21c68852.js" defer></script><script src="/assets/js/3.9085141e.js" defer></script><script src="/assets/js/16.3bcf5d67.js" defer></script>
+  </body>
+</html>
