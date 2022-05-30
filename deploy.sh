@@ -10,14 +10,14 @@ npm run build
 cd docs/.vuepress/dist
 
 # deploy to github pages
-echo 'b.xugaoyi.com' > CNAME
+echo 'ljlsbqf.github.io.git' > CNAME
 
 if [ -z "$GITHUB_TOKEN" ]; then
   msg='deploy'
-  githubUrl=git@github.com:xugaoyi/ljlsbqf.git
+  githubUrl=git@github.com:ljlsbqf/ljlsbqf.github.io.git
 else
   msg='来自github actions的自动部署'
-  githubUrl=https://xugaoyi:${GITHUB_TOKEN}@github.com/xugaoyi/vuepress-theme-vdoing.git
+  githubUrl=https://xugaoyi:${GITHUB_TOKEN}@ljlsbqf/ljlsbqf.github.io.git
   git config --global user.name "ljlsbqf"
   git config --global user.email "634607608@qq.com"
 fi
