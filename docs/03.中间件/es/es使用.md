@@ -1,3 +1,13 @@
+---
+title: es使用
+date: 2022-06-07 00:06:25
+permalink: /pages/9decf4/
+categories:
+  - 中间件
+  - es
+tags:
+  - 
+---
 ### 说明
 升级了springboot到2.7版本,看到以前使用的RestHighLevelClient 被标注@Deprecated.
 查看官网：介绍

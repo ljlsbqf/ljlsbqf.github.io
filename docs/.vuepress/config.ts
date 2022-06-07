@@ -57,7 +57,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     searchMaxSuggestions: 10, // 搜索结果显示最大数
     lastUpdated: '上次更新', // 开启更新时间，并配置前缀文字   string | boolean (取值为git提交时间)
     docsDir: 'docs', // 编辑的文件夹
-    editLinks: true, // 启用编辑
+    editLinks: false, // 启用编辑
     editLinkText: '编辑',
 
     //*** 以下是Vdoing主题相关配置，文档：https://doc.xugaoyi.com/pages/a20ce8/ ***//
@@ -229,11 +229,11 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     },
 
     // 评论区
-    'vuepress-plugin-comment': {
+    /*'vuepress-plugin-comment': {
       choosen: 'gitalk',
       options: {
-        clientID: 'a6e1355287947096b88b',
-        clientSecret: 'f0e77d070fabfcd5af95bebb82b2d574d7248d71',
+        clientID: '395a76e7bbdd9dededd5',
+        clientSecret: 'dff516fe6ca11ebdb712d381ca5a09c542dd84ad',
         repo: 'blog-gitalk-comment', // GitHub 仓库
         owner: 'ljlsbqf', // GitHub仓库所有者
         admin: ['ljlsbqf'], // 对仓库有写权限的人
@@ -245,7 +245,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         body:
           '页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>', // GitHub issue 的内容
       },
-    },
+    },*/
 
     // "上次更新"的时间格式
     '@vuepress/last-updated': {
