@@ -25,12 +25,12 @@ https://blog.csdn.net/UbuntuTouch/article/details/123839857
 
 连接样例代码：
 ~~~
- private String esname = "elastic";
-    private String espwd = "elasticdev";
+ private String esname = "name";
+    private String espwd = "pwd";
 
     private CertsEnum certs = CertsEnum.P12;
 
-    private String hostname = "120.46.142.51";
+    private String hostname = "ip";
     private String schema = "https";
 
     private Integer port =9200;
