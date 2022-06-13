@@ -273,7 +273,8 @@ must：其查询子句必须全部被满足，逻辑相当于 and ，并且会�
 filter：与 must 作用一样，但是不会计算分数。在 filter context  下的查询子句不会计算分数且会被缓存。
 should：其查询子句应该被满足，也就是不一定都满足，逻辑相当于 or。
 
-es8推出了多条件的聚合查询，但是，java api好像没提供
+es8推出了多条件的聚合查询
+MultiTermsAggregation支持排序,如果不用排序可 using nested terms aggregation or composite aggregations
 具体查看：https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-multi-terms-aggregation.html
 
 ~~~
@@ -380,6 +381,35 @@ curl --cacert /opt/elasticsearch/config/certs/http_ca.crt -u elastic https://loc
         "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
       }
   }
+}'
+
+多条件聚合
+curl --cacert /opt/elasticsearch/config/certs/http_ca.crt -u elastic https://localhost:9200/student/_search -H 'Content-Type:application/json;charset=utf-8'  -X POST -d '
+{
+	"aggregations": {
+		"schoolAndSexAgg": {
+			"multi_terms": {
+				"terms": [{
+					"field": "schoolName.keyword"
+				}, {
+					"field": "sex"
+				}]
+			}
+		}
+	},
+	"query": {
+		"bool": {
+			"filter": [{
+				"range": {
+					"joinDate": {
+						"from": "2000-08-02 15:30:45",
+						"to": "2023-12-02 15:30:45",
+						"format": "yyyy-MM-dd HH:mm:ss"
+					}
+				}
+			}]
+		}
+	}
 }'
 
 ~~~
