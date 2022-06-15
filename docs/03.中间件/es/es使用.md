@@ -1,5 +1,5 @@
 ---
-title: es使用
+title: es8使用
 date: 2022-06-07 00:06:25
 permalink: /pages/9decf4/
 categories:
@@ -17,7 +17,7 @@ The Java REST Client is deprecated in favor of the Java API Client.
 参考链接：https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/current/connecting.html
 https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#repositories
 https://blog.csdn.net/UbuntuTouch/article/details/123839857
-### 1. java客户端连接：
+### 1. es8 java客户端连接：
 
 1. java类客户端(API client classes): These provide strongly typed data structures and methods for Elasticsearch APIs. Since the Elasticsearch API is large, it is structured in feature groups (also called “namespaces”), each having its own client class. Elasticsearch core features are implemented in the ElasticsearchClient class.
 2. json对象映射（A JSON object mapper）. This maps your application classes to JSON and seamlessly integrates them with the API client.
@@ -234,7 +234,19 @@ https://github.com/elastic/elasticsearch-java/tree/8.2/java-client/src/test/java
 https://blog.csdn.net/weixin_45203607/article/details/124332531
 ~~~
 
+### es7为啥移除type
+~~~
+https://blog.csdn.net/qq_29860591/article/details/109340346
+https://www.cnblogs.com/miracle-luna/p/10998670.html
+https://segmentfault.com/a/1190000040330218
+Elasticsearch：index   -->  type     -->   doc   -->  field
+MySQL:          数据库  -->   数据表 -->    行     -->  列
 
+因为 Elasticsearch 设计初期，是直接查考了关系型数据库的设计模式，存在了 type（数据表）的概念。
+但是，其搜索引擎是基于 Lucene 的，这种 “基因”决定了 type 是多余的。 Lucene 的全文检索功能之所以快，是因为 倒序索引 的存在。
+而这种 倒序索引 的生成是基于 index 的，而并非 type。多个type 反而会减慢搜索的速度。
+为了保持 Elasticsearch “一切为了搜索” 的宗旨，适当的做些改变（去除 type）也是无可厚非的，也是值得的。
+~~~
 
 ### es字段说明
 ~~~
@@ -383,7 +395,7 @@ curl --cacert /opt/elasticsearch/config/certs/http_ca.crt -u elastic https://loc
   }
 }'
 
-多条件聚合
+es8多条件聚合
 curl --cacert /opt/elasticsearch/config/certs/http_ca.crt -u elastic https://localhost:9200/student/_search -H 'Content-Type:application/json;charset=utf-8'  -X POST -d '
 {
 	"aggregations": {
@@ -407,6 +419,12 @@ curl --cacert /opt/elasticsearch/config/certs/http_ca.crt -u elastic https://loc
 						"format": "yyyy-MM-dd HH:mm:ss"
 					}
 				}
+			}],
+			"must": [{
+				"multi_match": {
+					"fields": ["schoolName", "userName.first"],
+					"query": "中"
+				}
 			}]
 		}
 	}
@@ -414,9 +432,41 @@ curl --cacert /opt/elasticsearch/config/certs/http_ca.crt -u elastic https://loc
 
 ~~~
 
-
-~~~ es的类型和映射
+### es的类型和映射
+~~~ 
 参考：https://www.elastic.co/guide/cn/elasticsearch/guide/current/mapping.html
 https://www.elastic.co/guide/en/elasticsearch/reference/current/release-highlights.html
+
+~~~
+
+### es查询类型
+~~~
+参考:https://blog.csdn.net/weixin_44688301/article/details/115916547
+https://blog.csdn.net/z8756413/article/details/85068970
+
+query：侧重在文档匹配度上，并返回匹配度计算_score，
+filter：侧重在返回结果和查询条件的相关性上,适用于精确匹配，比如时间范围
+term:代表完全匹配，即不进行分词器分析，文档中必须包含整个搜索的词汇
+match:查询的时候,es会根据你给定的字段提供合适的分析器,而term查询不会有分析器分析的过程，match查询相当于模糊匹配,只包含其中一部分关键词就行
+
+~~~
+
+### es倒排序
+参考:https://www.jianshu.com/p/ce6e87e4022e
+~~~
+正排索引：文档ID到文档内容和单词的关联
+倒排索引：单词到文档ID的关系
+备注：ES对文档每个字段都有自己的倒排索引，可以指定某些字段不做索引，这样可以节省存储空间，缺点是这个字段无法被搜索。
+
+倒排索引不可变性
+倒排索引采用Immutable Design，一旦生成，不可更改。
+
+优点
+（1）无需考虑并发写文件的问题，避免了锁机制带来的性能问题
+（2）一旦读入内核的文件系统缓存，便留在那里。只要文件系统存有足够大的空间。大部分请求就会直接请求内存，不会命中磁盘，提升了很大的性能
+缺点
+不可变性也带来了另一个挑战，如果需要让一个新的文档可以被索引，需要重建整个索引。
+
+~~~
 
 
