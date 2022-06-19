@@ -29,7 +29,6 @@ sudo mkdir -p /opt/elasticsearch/plugins
 
 4.容器启动
 ~~~
- --net elknet --ip 127.0.0.1 \
 sudo docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
  -e "discovery.type=single-node" \
  -e ES_JAVA_OPTS="-Xms84m -Xmx512m" \
