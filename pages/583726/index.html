@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>redis安装 | 闲人路过</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="">
+    <meta name="description" content="个人学习网站。">
+    <meta name="keywords" content="web,java,中间件,技术文档,学习,git,github,markdown,sql">
+    <meta name="baidu-site-verification" content="7F55weZDDc">
+    <meta name="theme-color" content="#11a8cd">
+    
+    <link rel="preload" href="/assets/css/0.styles.85a99290.css" as="style"><link rel="preload" href="/assets/js/app.c0a022cc.js" as="script"><link rel="preload" href="/assets/js/2.82f7326a.js" as="script"><link rel="preload" href="/assets/js/3.9f7e119e.js" as="script"><link rel="preload" href="/assets/js/30.0a6f1d00.js" as="script"><link rel="prefetch" href="/assets/js/10.2759d341.js"><link rel="prefetch" href="/assets/js/11.1baa0754.js"><link rel="prefetch" href="/assets/js/12.4bc6e6db.js"><link rel="prefetch" href="/assets/js/13.d39d7ac1.js"><link rel="prefetch" href="/assets/js/14.b7ef02a3.js"><link rel="prefetch" href="/assets/js/15.21ec1b1b.js"><link rel="prefetch" href="/assets/js/16.eb62b048.js"><link rel="prefetch" href="/assets/js/17.b429106c.js"><link rel="prefetch" href="/assets/js/18.e508bf33.js"><link rel="prefetch" href="/assets/js/19.78153272.js"><link rel="prefetch" href="/assets/js/20.b6a82739.js"><link rel="prefetch" href="/assets/js/21.90265c24.js"><link rel="prefetch" href="/assets/js/22.5fcc7346.js"><link rel="prefetch" href="/assets/js/23.798358ab.js"><link rel="prefetch" href="/assets/js/24.94f7249b.js"><link rel="prefetch" href="/assets/js/25.6caf8821.js"><link rel="prefetch" href="/assets/js/26.269b58e6.js"><link rel="prefetch" href="/assets/js/27.9e49ea0b.js"><link rel="prefetch" href="/assets/js/28.c889421c.js"><link rel="prefetch" href="/assets/js/29.36ffeefc.js"><link rel="prefetch" href="/assets/js/31.9c2481b4.js"><link rel="prefetch" href="/assets/js/32.8fa63b3a.js"><link rel="prefetch" href="/assets/js/33.74627f31.js"><link rel="prefetch" href="/assets/js/34.5969a958.js"><link rel="prefetch" href="/assets/js/35.073e6fb7.js"><link rel="prefetch" href="/assets/js/36.ecf314b6.js"><link rel="prefetch" href="/assets/js/37.c471dc40.js"><link rel="prefetch" href="/assets/js/4.c506d23f.js"><link rel="prefetch" href="/assets/js/5.45e687e8.js"><link rel="prefetch" href="/assets/js/6.022a9d6d.js"><link rel="prefetch" href="/assets/js/7.143e3c01.js"><link rel="prefetch" href="/assets/js/8.8a90db04.js"><link rel="prefetch" href="/assets/js/9.8703cfba.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.85a99290.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open no-sidebar have-rightmenu have-body-img"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">闲人路过</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div> <a href="https://github.com/ljlsbqf" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar-hover-trigger"></div> <aside class="sidebar" style="display:none;"><!----> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div> <a href="https://github.com/ljlsbqf" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <!----> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-d5e9d2e6><div class="articleInfo" data-v-d5e9d2e6><ul class="breadcrumbs" data-v-d5e9d2e6><li data-v-d5e9d2e6><a href="/" title="首页" class="iconfont icon-home router-link-active" data-v-d5e9d2e6></a></li> <li data-v-d5e9d2e6><a href="/plugin/#中间件" data-v-d5e9d2e6>中间件</a></li><li data-v-d5e9d2e6><a href="/plugin/#redis" data-v-d5e9d2e6>redis</a></li></ul> <div class="info" data-v-d5e9d2e6><div title="作者" class="author iconfont icon-touxiang" data-v-d5e9d2e6><a href="https://github.com/ljlsbqf" target="_blank" title="作者" class="beLink" data-v-d5e9d2e6>ljlsbqf</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-d5e9d2e6><a href="javascript:;" data-v-d5e9d2e6>2022-06-15</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><div class="right-menu-wrapper"><div class="right-menu-margin"><div class="right-menu-content"></div></div></div> <h1><!---->redis安装<!----></h1>  <div class="theme-vdoing-content content__default"><h3 id="安装redis7"><a href="#安装redis7" class="header-anchor">#</a> 安装redis7</h3> <p>github:https://github.com/redis/redis</p> <p>官网:https://redis.io/docs/</p> <p>1.dockerhub官网查询镜像安装:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>docker pull redis:7.0.2
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>3.创建本机挂载目录</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>sudo mkdir -p /opt/redis/data
+sudo mkdir -p /opt/elasticsearch/data
+sudo mkdir -p /opt/elasticsearch/plugins
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>4.容器启动</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>sudo docker run --name redis -p 6379:6379 \
+ -v /opt/redis/redis.conf:/etc/redis.conf \
+ -v /opt/redis/data:/data \
+ -d redis:7.0.2 redis-server /etc/redis.conf
+
+redis镜像内是没有redis.conf文件的，需要用户自己到github上下载映射进去
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>参数说明:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>--privileged=true：容器内的root拥有真正root权限，否则容器内root只是外部普通用户权限
+-v /docker/redis/conf/redis.conf:/etc/redis/redis.conf：映射配置文件
+-v /docker/redis/data:/data：映射数据目录
+redis-server /etc/redis/redis.conf：指定配置文件启动redis-server进程
+--appendonly yes：开启数据持久化
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>5.ca证书生成
+下载ca生成脚本:https://fossies.org/linux/redis/utils/gen-test-certs.sh
+或下载redis源码获取</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#!/bin/bash
+
+# Generate some test certificates which are used by the regression test suite:
+#
+#   tests/tls/ca.{crt,key}          Self signed CA certificate.
+#   tests/tls/redis.{crt,key}       A certificate with no key usage/policy restrictions.
+#   tests/tls/client.{crt,key}      A certificate restricted for SSL client usage.
+#   tests/tls/server.{crt,key}      A certificate restricted for SSL server usage.
+#   tests/tls/redis.dh              DH Params file.
+
+generate_cert() {
+    local name=$1
+    local cn=&quot;$2&quot;
+    local opts=&quot;$3&quot;
+
+    local keyfile=/opt/redis/tls/${name}.key
+    local certfile=/opt/redis/tls/${name}.crt
+
+    [ -f $keyfile ] || openssl genrsa -out $keyfile 2048
+    openssl req \
+        -new -sha256 \
+        -subj &quot;/O=Redis Test/CN=$cn&quot; \
+        -key $keyfile | \
+        openssl x509 \
+            -req -sha256 \
+            -CA /opt/redis/tls/ca.crt \
+            -CAkey /opt/redis/tls/ca.key \
+            -CAserial /opt/redis/tls/ca.txt \
+            -CAcreateserial \
+            -days 365 \
+            $opts \
+            -out $certfile
+}
+
+mkdir -p /opt/redis/tls
+[ -f /opt/redis/tls/ca.key ] || openssl genrsa -out /opt/redis/tls/ca.key 4096
+openssl req \
+    -x509 -new -nodes -sha256 \
+    -key /opt/redis/tls/ca.key \
+    -days 3650 \
+    -subj '/O=Redis Test/CN=Certificate Authority' \
+    -out /opt/redis/tls/ca.crt
+
+cat &gt; /opt/redis/tls/openssl.cnf &lt;&lt;_END_
+[ server_cert ]
+keyUsage = digitalSignature, keyEncipherment
+nsCertType = server
+
+[ client_cert ]
+keyUsage = digitalSignature, keyEncipherment
+nsCertType = client
+_END_
+
+generate_cert server &quot;Server-only&quot; &quot;-extfile /opt/redis/tls/openssl.cnf -extensions server_cert&quot;
+generate_cert client &quot;Client-only&quot; &quot;-extfile /opt/redis/tls/openssl.cnf -extensions client_cert&quot;
+generate_cert redis &quot;Generic-cert&quot;
+
+[ -f /opt/redis/tls/redis.dh ] || openssl dhparam -out /opt/redis/tls/redis.dh 2048
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br></div></div><ol start="6"><li>redis 开启tls</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>修改配置文件redis.conf
+--tls-port 6379 --port 0 \
+--tls-cert-file /opt/redis/redis-7.0.2/tests/tls/redis.crt \
+--tls-key-file /opt/redis/redis-7.0.2/tests/tls/redis.key \
+--tls-ca-cert-file /opt/redis/redis-7.0.2/tests/tls/ca.crt
+  
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><ol start="7"><li>登录校验</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>启动：
+./src/redis-server \
+--tls-port 6379 --port 0 \
+--tls-cert-file /opt/redis/redis-7.0.2/tests/tls/redis.crt \
+--tls-key-file /opt/redis/redis-7.0.2/tests/tls/redis.key \
+--tls-ca-cert-file /opt/redis/redis-7.0.2/tests/tls/ca.crt
+
+./src/redis-cli -a foobared --tls \
+--cert ./tests/tls/redis.crt \
+--key ./tests/tls/redis.key \
+--cacert ./tests/tls/ca.crt
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>6.配置redis tls访问
+参考:https://redis.io/docs/manual/security/encryption/
+https://blog.csdn.net/shuux666/article/details/123838193</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></div></div>  <div class="page-edit"><!----> <!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2022/06/19, 17:11:04</span></div></div> <div class="page-nav-wapper"><!----> <!----></div></div> <div class="article-list"><div class="article-title"><a href="/archives/" class="iconfont icon-bi">最近更新</a></div> <div class="article-wrapper"><dl><dd>01</dd> <dt><a href="/pages/0a8d0b/"><div>
+            redis
+            <!----></div></a> <span class="date">06-15</span></dt></dl><dl><dd>02</dd> <dt><a href="/pages/30b722/"><div>
+            CA证书说明
+            <!----></div></a> <span class="date">06-10</span></dt></dl><dl><dd>03</dd> <dt><a href="/pages/3eb8ea/"><div>
+            dokcer network命令
+            <!----></div></a> <span class="date">06-09</span></dt></dl> <dl><dd></dd> <dt><a href="/archives/" class="more">更多文章&gt;</a></dt></dl></div></div></main></div> <div class="footer"><!----> 
+  本博客搭建脚本来源
+  <a href="https://github.com/xugaoyi/vuepress-theme-vdoing" target="_blank" title="本站主题">Vdoing</a> 
+    | Copyright © 2022-2022
+    <span><a href="https://github.com/xugaoyi/vuepress-theme-vdoing/blob/master/LICENSE" target="_blank">MIT License</a></span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <div class="body-bg" style="background:url() center center / cover no-repeat;opacity:0.5;"></div> <!----> <!----></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.c0a022cc.js" defer></script><script src="/assets/js/2.82f7326a.js" defer></script><script src="/assets/js/3.9f7e119e.js" defer></script><script src="/assets/js/30.0a6f1d00.js" defer></script>
+  </body>
+</html>
